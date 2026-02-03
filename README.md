@@ -104,6 +104,21 @@ You can use the following demo account to explore the application without creati
 
 ---
 
+## 📮 Postman Collection
+
+A Postman collection is included to test all API endpoints.
+
+**File:** `Planixa.postman_collection.json`
+
+### How to use:
+1. Open Postman
+2. Import the collection file
+3. Set base URL to `http://localhost:3000`
+4. Login using demo credentials
+5. Test all authenticated APIs
+
+---
+
 ## ▶️ Getting Started
 
 ### 1️⃣ Clone the repository
@@ -130,21 +145,21 @@ The app will be available at:
 ## 🔐 API Endpoints (Overview)
 
 ### Authentication
-- POST `/api/auth/signup` – Create account
-- POST `/api/auth/login` – Login user
-- POST `/api/auth/logout` – Logout user
-- GET `/api/auth/me` – Get logged-in user
+- POST `/api/v1/auth/signup` – Create account
+- POST `/api/v1/auth/login` – Login user
+- POST `/api/v1/auth/logout` – Logout user
+- GET `/api/v1/auth/me` – Get logged-in user
 
 ### Profile
 - GET `/api/v1/me` – Fetch profile
 - PUT `/api/v1/me` – Update profile
 
 ### Tasks
-- GET `/api/tasks/list` – Get all tasks
-- POST `/api/tasks/create` – Create a task
-- GET `/api/tasks/read/:id` – Read a task
-- PUT `/api/tasks/update/:id` – Update a task
-- DELETE `/api/tasks/delete/:id` – Delete a task
+- GET `/api/v1/tasks/list` – Get all tasks
+- POST `/api/v1/tasks/create` – Create a task
+- GET `/api/v1/tasks/read/:id` – Read a task
+- PUT `/api/v1/tasks/update/:id` – Update a task
+- DELETE `/api/v1/tasks/delete/:id` – Delete a task
 
 ---
 
