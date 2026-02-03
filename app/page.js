@@ -166,7 +166,7 @@ export default function Home() {
             Stay Organized. Stay Productive.
           </h2>
           <p className="text-zinc-400 mb-10">
-            Taskory helps you manage your tasks efficiently and focus on what
+            Planixa helps you manage your tasks efficiently and focus on what
             matters most.
           </p>
 
