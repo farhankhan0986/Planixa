@@ -91,6 +91,19 @@ You can use the following demo account to explore the application without creati
 
 ---
 
+## 📈 How I Would Scale This for Production
+
+- Move backend to a dedicated service (Node.js / FastAPI)
+- Use refresh tokens & token rotation
+- Add role‑based access control (RBAC)
+- Introduce pagination & indexing on MongoDB
+- Add Redis caching for frequent reads
+- Enable rate‑limiting & request logging
+- Use environment‑specific configs & secrets manager
+- Deploy with CI/CD and containerization (Docker)
+
+---
+
 ## ▶️ Getting Started
 
 ### 1️⃣ Clone the repository
