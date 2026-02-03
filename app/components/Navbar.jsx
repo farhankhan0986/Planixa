@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
+import {toast} from "sonner";
 import { motion } from "framer-motion";
 
 export default function Navbar() {
@@ -13,7 +14,7 @@ export default function Navbar() {
   useEffect(() => {
     const fetchMe = async () => {
       try {
-        const res = await fetch("/api/auth/me", { credentials: "include" });
+        const res = await fetch("/api/v1/auth/me", { credentials: "include" });
         if (!res.ok) {
           setUser(null);
           return;
@@ -21,6 +22,7 @@ export default function Navbar() {
         const data = await res.json();
         setUser(data.loggedIn ? data.user : null);
       } catch {
+        toast.error("Failed to load user data");
         setUser(null);
       }
     };
@@ -29,13 +31,15 @@ export default function Navbar() {
 
   const handleLogout = async () => {
     try {
-      const res = await fetch("/api/auth/logout", { method: "POST" });
+      const res = await fetch("/api/v1/auth/logout", { method: "POST" });
       if (res.ok) {
         setUser(null);
         router.push("/login");
+        toast.success("Logged out successfully");
       }
     } catch (err) {
       console.error("Logout failed", err);
+      toast.error("Logout failed");
     }
   };
 
@@ -75,6 +79,17 @@ export default function Navbar() {
                   </Link>
                 </motion.div>
 
+                <motion.button
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => router.push("/tasks")}
+                  className={`transition ${
+                      pathname === "/tasks"
+                        ? "text-emerald-400"
+                        : "text-zinc-300 hover:text-zinc-100"
+                    }`}
+                >
+                  Tasks
+                </motion.button>
                 <motion.button
                   whileTap={{ scale: 0.95 }}
                   onClick={handleLogout}

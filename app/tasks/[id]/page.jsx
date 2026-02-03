@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
+import { toast } from "sonner";
 import { motion } from "framer-motion";
 
 export default function ReadTaskPage() {
@@ -15,7 +16,7 @@ export default function ReadTaskPage() {
   useEffect(() => {
     const fetchTask = async () => {
       try {
-        const res = await fetch(`/api/tasks/read/${id}`, {
+        const res = await fetch(`/api/v1/tasks/read/${id}`, {
           credentials: "include",
         });
 
@@ -23,12 +24,15 @@ export default function ReadTaskPage() {
 
         if (!res.ok) {
           setError(result.message || "Failed to load task");
+          toast.error(result.message || "Failed to load task");
           return;
         }
 
         setTask(result.task);
+        toast.success("Task loaded successfully!");
       } catch {
         setError("Something went wrong");
+        toast.error("Something went wrong");
       } finally {
         setLoading(false);
       }
@@ -122,7 +126,7 @@ export default function ReadTaskPage() {
           {/* Actions */}
           <div className="flex gap-3">
             <button
-              onClick={() => router.push("/dashboard")}
+              onClick={() => router.push("/tasks")}
               className="px-5 py-2 rounded-lg bg-zinc-700 text-zinc-200 hover:bg-zinc-600 transition"
             >
               Back

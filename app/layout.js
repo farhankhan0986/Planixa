@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from "./components/Navbar";
+import { Toaster } from "sonner";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -13,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Anything AI",
-  description: "Your AI-powered task management assistant",
+  title: "Planixa - Task Management Simplified",
+  description: "A simple and elegant task management app to boost your productivity.",
 };
 
 export default function RootLayout({ children }) {
@@ -36,6 +37,7 @@ export default function RootLayout({ children }) {
         <main className="relative min-h-[calc(100vh-4rem)]">
           {children}
         </main>
+        <Toaster richColors />
       </body>
     </html>
   );

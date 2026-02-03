@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 import { motion } from "framer-motion";
 
 export default function SignupPage() {
@@ -31,7 +32,7 @@ export default function SignupPage() {
     }
 
     try {
-      const res = await fetch("/api/auth/signup", {
+      const res = await fetch("/api/v1/auth/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -40,12 +41,15 @@ export default function SignupPage() {
       const data = await res.json();
       if (!res.ok) {
         setError(data.message || "Something went wrong");
+        toast.error(data.message || "Something went wrong");
         return;
       }
 
       router.push("/login");
+      toast.success("Account created successfully! Please log in.");
     } catch {
       setError("Internal Server Error, please try again later.");
+      toast.error("Internal Server Error, please try again later.");
     } finally {
       setLoading(false);
     }
@@ -122,6 +126,7 @@ export default function SignupPage() {
               name="password"
               placeholder="••••••••"
               value={formData.password}
+              minLength={6}
               onChange={handleChange}
               className="h-12 w-full px-4 pr-10 rounded-lg bg-[#0f1115] border border-white/10 text-zinc-200
               focus:outline-none focus:border-emerald-400/60 transition"
@@ -144,6 +149,7 @@ export default function SignupPage() {
             name="repeat_password"
             placeholder="••••••••"
             value={formData.repeat_password}
+            minLength={6}
             onChange={handleChange}
             className="h-12 px-4 rounded-lg bg-[#0f1115] border border-white/10 text-zinc-200
             focus:outline-none focus:border-emerald-400/60 transition"

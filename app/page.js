@@ -1,9 +1,23 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 export default function Home() {
+  const fullText = "Planixa";
+  const [displayedText, setDisplayedText] = useState("");
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDisplayedText(fullText.slice(0, index + 1));
+      setIndex((prev) => (prev + 1) % (fullText.length + 1));
+    }, 400); // typing speed
+
+    return () => clearInterval(interval);
+  }, [index]);
+
   return (
     <div className="relative min-h-screen">
       {/* HERO */}
@@ -15,8 +29,11 @@ export default function Home() {
           className="max-w-4xl text-center"
         >
           <h1 className="text-5xl sm:text-6xl font-semibold text-gradient leading-tight">
-            Organize Your Tasks with <br></br>
-            <span className="text-gradient text-7xl">"Planixa"</span>
+            Organize Your Tasks with <br />
+            <span className="text-7xl font-semibold">
+              <span className="text-gradient transition">"{displayedText}"</span>
+              <span className="ml-1 animate-pulse ">|</span>
+            </span>
           </h1>
 
           <p className="mt-6 text-lg text-zinc-400">

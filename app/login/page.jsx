@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+import { toast } from "sonner";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -20,7 +21,7 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      const res = await fetch("/api/auth/login", {
+      const res = await fetch("/api/v1/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -29,13 +30,16 @@ export default function LoginPage() {
       const data = await res.json();
       if (!res.ok) {
         setError(data.message || "Something went wrong");
+        toast.error(data.message || "Something went wrong");
         return;
       }
 
       router.refresh();
       router.push("/dashboard");
+      toast.success("Login successful!");
     } catch {
       setError("Internal Server Error, please try again later.");
+      toast.error("Internal Server Error, please try again later.");
     } finally {
       setLoading(false);
     }
