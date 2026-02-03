@@ -1,7 +1,7 @@
 {
   "info": {
     "_postman_id": "b4a7f008-1b95-4a81-b264-009ee42ac69a",
-    "name": "Anything.ai – Frontend Intern Assignment",
+    "name": "Planixa – Frontend Intern Assignment",
     "description": "Postman collection for Auth, Profile, and Tasks APIs (JWT Cookie based)",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "47279076",
