@@ -79,6 +79,13 @@ MONGODB_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
 ```
 
+## 🔑 Demo Credentials / Seed Data
+
+You can use the following demo account to explore the application without creating a new user:
+
+- **Email:** demo@planixa.com  
+- **Password:** demo123  
+
 ---
 
 ## ▶️ Getting Started
