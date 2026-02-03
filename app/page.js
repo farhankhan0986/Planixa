@@ -1,65 +1,171 @@
-import Image from "next/image";
+"use client";
+
+import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.js file.
+    <div className="relative min-h-screen">
+      {/* HERO */}
+      <section className="min-h-screen flex items-center justify-center px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className="max-w-4xl text-center"
+        >
+          <h1 className="text-5xl sm:text-6xl font-semibold text-gradient leading-tight">
+            Organize Your Tasks with <br></br>
+            <span className="text-gradient text-7xl">"Planixa"</span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+
+          <p className="mt-6 text-lg text-zinc-400">
+            A simple and powerful task management platform to help you organize
+            your work, track progress, and stay focused.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+          <div className="mt-10 flex justify-center gap-4">
+            <Link
+              href="/signup"
+              className="px-6 py-3 rounded-lg font-medium bg-linear-to-r from-emerald-500 to-amber-500 text-black hover:brightness-110 transition"
+            >
+              Get Started
+            </Link>
+
+            <Link
+              href="/login"
+              className="px-6 py-3 rounded-lg border border-white/15 text-zinc-200 hover:bg-white/5 transition"
+            >
+              Sign In
+            </Link>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* FEATURES */}
+      <section className="px-6 py-24">
+        <div className="max-w-6xl mx-auto">
+          <motion.h2
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl font-semibold text-center text-zinc-200 mb-16"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            Why Planixa?
+          </motion.h2>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Simple Task Creation",
+                desc: "Create tasks quickly with titles and descriptions that keep everything clear.",
+              },
+              {
+                title: "Clean & Focused Interface",
+                desc: "A distraction-free design that helps you stay productive without overwhelm.",
+              },
+              {
+                title: "Secure & Private",
+                desc: "Your data is protected and accessible only to you.",
+              },
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="glass p-6"
+              >
+                <h3 className="text-lg font-medium text-zinc-200 mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-zinc-400 text-sm leading-relaxed">
+                  {item.desc}
+                </p>
+              </motion.div>
+            ))}
+          </div>
         </div>
-      </main>
+      </section>
+
+      {/* HOW IT WORKS */}
+      <section className="px-6 py-24 border-t border-white/10">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-3xl font-semibold text-zinc-200 mb-12 text-center">
+            How It Works
+          </h2>
+
+          <div className="space-y-10">
+            {[
+              {
+                step: "01",
+                title: "Create Tasks",
+                desc: "Add tasks with titles and optional descriptions to capture your work.",
+              },
+              {
+                step: "02",
+                title: "Edit & Manage",
+                desc: "Update, edit, or delete tasks as your priorities change.",
+              },
+              {
+                step: "03",
+                title: "Track Progress",
+                desc: "View all your tasks in one place and stay organized every day.",
+              },
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="flex gap-6 items-start"
+              >
+                <span className="text-emerald-400 font-mono text-sm">
+                  {item.step}
+                </span>
+                <div>
+                  <h3 className="text-lg font-medium text-zinc-200">
+                    {item.title}
+                  </h3>
+                  <p className="text-zinc-400 mt-1">{item.desc}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="px-6 py-32 border-t border-white/10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-3xl mx-auto text-center"
+        >
+          <h2 className="text-4xl font-semibold text-gradient mb-6">
+            Stay Organized. Stay Productive.
+          </h2>
+          <p className="text-zinc-400 mb-10">
+            Taskory helps you manage your tasks efficiently and focus on what
+            matters most.
+          </p>
+
+          <Link
+            href="/signup"
+            className="inline-block px-8 py-3 rounded-lg font-medium bg-linear-to-r from-emerald-500 to-amber-500 text-black hover:brightness-110 transition"
+          >
+            Start Free Today
+          </Link>
+        </motion.div>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="border-t border-white/10 py-10 text-center text-sm text-zinc-500">
+        © {new Date().getFullYear()} Planixa. All rights reserved.
+      </footer>
     </div>
   );
 }

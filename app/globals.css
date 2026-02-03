@@ -1,10 +1,40 @@
 @import "tailwindcss";
 
+/* --------------------
+   CSS VARIABLES
+-------------------- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0b0d10;        /* deep charcoal */
+  --background-soft: #111418;   /* card surfaces */
+  --foreground: #e6e6e6;        /* primary text */
+  --foreground-muted: #a1a1aa;  /* secondary text */
+
+  /* Accent system (neutral + warm, NO blue/purple) */
+  --accent-1: #22c55e; /* emerald */
+  --accent-2: #f59e0b; /* amber */
+  --accent-3: #ef4444; /* soft red */
+
+  /* Gradients */
+  --gradient-main: linear-gradient(
+    135deg,
+    #0b0d10 0%,
+    #12161c 50%,
+    #0b0d10 100%
+  );
+
+  --gradient-card: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.06),
+    rgba(255, 255, 255, 0.02)
+  );
+
+  /* Effects */
+  --border-soft: rgba(255, 255, 255, 0.08);
+  --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.45);
+  --blur-glass: blur(12px);
 }
 
+/* Tailwind theme bindings */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -12,15 +42,88 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* --------------------
+   BASE STYLES
+-------------------- */
+body {
+  background: var(--gradient-main);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* --------------------
+   SELECTION
+-------------------- */
+::selection {
+  background: rgba(34, 197, 94, 0.35); /* emerald tint */
+  color: #ffffff;
+}
+
+/* --------------------
+   SCROLLBAR (modern)
+-------------------- */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* --------------------
+   UTILITY CLASSES
+-------------------- */
+
+/* Glass card */
+.glass {
+  background: var(--gradient-card);
+  backdrop-filter: var(--blur-glass);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-soft);
+  border-radius: 1rem;
+}
+
+/* Soft hover lift */
+.hover-lift {
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+/* Gradient text (neutral → accent) */
+.text-gradient {
+  background: linear-gradient(
+    90deg,
+    #e5e7eb,
+    var(--accent-1),
+    var(--accent-2)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Divider line */
+.divider {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.15),
+    transparent
+  );
 }
