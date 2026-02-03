@@ -1,36 +1,149 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Planixa 🗂️
 
-## Getting Started
+Planixa is a modern task management web application that helps users organize, manage, and track their tasks efficiently through a clean and intuitive interface.
 
-First, run the development server:
+Built with **Next.js (App Router)**, Planixa focuses on simplicity, performance, and a polished user experience.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## 🚀 Features
+
+- 🔐 **Authentication**
+  - User signup & login
+  - Secure session handling with JWT
+- 🧑‍💼 **User Profile**
+  - View and update profile details
+- ✅ **Task Management**
+  - Create, read, update, and delete tasks
+  - Optional task descriptions
+- 🔍 **Task Search & Filter**
+  - Search tasks by title or description
+  - Filter tasks with or without descriptions
+- 📄 **Task Detail View**
+  - Dedicated reading page for each task
+- 🎨 **Modern UI**
+  - Dark theme with glassmorphism
+  - Smooth animations using Framer Motion
+  - Skeleton loaders for better UX
+- 📱 **Responsive Design**
+  - Works across desktop and mobile devices
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+- **Next.js 14+ (App Router)**
+- **React**
+- **Tailwind CSS**
+- **Framer Motion**
+
+### Backend
+- **Next.js API Routes**
+- **MongoDB**
+- **Mongoose**
+- **JWT Authentication**
+
+---
+
+## 📂 Project Structure
+
+```
+app/
+├─ api/
+│ ├─ auth/
+│ ├─ tasks/
+│ └─ v1/me/
+├─ dashboard/
+├─ tasks/
+│ └─ [id]/
+├─ profile/
+├─ login/
+├─ signup/
+└─ page.jsx
+lib/
+├─ db.js
+└─ jwt.js
+models/
+└─ User.js
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## ⚙️ Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create a `.env.local` file in the root directory:
 
-## Learn More
+```env
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ▶️ Getting Started
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 1️⃣ Clone the repository
+```bash
+git clone https://github.com/your-username/planixa.git
+cd planixa
+```
 
-## Deploy on Vercel
+### 2️⃣ Install dependencies
+```bash
+npm install
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 3️⃣ Run the development server
+```bash
+npm run dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The app will be available at:  
+👉 http://localhost:3000
+
+---
+
+## 🔐 API Endpoints (Overview)
+
+### Authentication
+- POST `/api/auth/signup` – Create account
+- POST `/api/auth/login` – Login user
+- POST `/api/auth/logout` – Logout user
+- GET `/api/auth/me` – Get logged-in user
+
+### Profile
+- GET `/api/v1/me` – Fetch profile
+- PUT `/api/v1/me` – Update profile
+
+### Tasks
+- GET `/api/tasks/list` – Get all tasks
+- POST `/api/tasks/create` – Create a task
+- GET `/api/tasks/read/:id` – Read a task
+- PUT `/api/tasks/update/:id` – Update a task
+- DELETE `/api/tasks/delete/:id` – Delete a task
+
+---
+
+## ✨ UI Highlights
+- Glassmorphism cards
+- Gradient accents (emerald & amber)
+- Skeleton loaders for smooth loading states
+- Subtle motion for a premium feel
+
+---
+
+## 📌 Future Improvements
+- Task completion status
+- Pagination or infinite scrolling
+- Task tags & categories
+- Change password functionality
+- Account deletion (danger zone)
+
+---
+
+## 👨‍💻 Author
+**Farhan Abid**  
+Web Developer Intern @ Tripify Pvt Ltd
+
+GitHub: https://github.com/farhankhan0986
