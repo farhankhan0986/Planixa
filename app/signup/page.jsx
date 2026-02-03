@@ -156,6 +156,16 @@ export default function SignupPage() {
           />
         </div>
 
+        <div className="flex items-center justify-between text-sm text-zinc-400">
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" className="accent-emerald-500" required />
+            I agree to the <a href="/terms" className="text-emerald-400 hover:text-emerald-300 transition">
+              Terms of Service
+            </a>
+          </label>
+          
+        </div>
+
         {/* Submit */}
         <motion.button
           whileTap={{ scale: 0.97 }}
