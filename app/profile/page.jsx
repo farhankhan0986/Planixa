@@ -31,7 +31,6 @@ export default function ProfilePage() {
 
         setName(result.user.name || "");
         setEmail(result.user.email || "");
-        toast.success("Profile loaded successfully");
       } catch {
         toast.error("Failed to load profile");
       } finally {

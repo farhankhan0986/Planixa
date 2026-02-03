@@ -31,7 +31,6 @@ export default function TasksPage() {
         }
 
         setTasks(result.tasks || []);
-        toast.success("Tasks loaded successfully");
       } catch {
         setError("Something went wrong");
         toast.error("Failed to load tasks");

@@ -29,7 +29,6 @@ export default function ReadTaskPage() {
         }
 
         setTask(result.task);
-        toast.success("Task loaded successfully!");
       } catch {
         setError("Something went wrong");
         toast.error("Something went wrong");

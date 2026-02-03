@@ -122,9 +122,7 @@ export default function LoginPage() {
             <input type="checkbox" className="accent-emerald-500" />
             Remember me
           </label>
-          <span className="hover:text-emerald-400 cursor-pointer transition">
-            Forgot password?
-          </span>
+          
         </div>
 
         {/* Submit */}
