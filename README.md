@@ -144,6 +144,6 @@ The app will be available at:
 
 ## 👨‍💻 Author
 **Farhan Abid**  
-Web Developer Intern @ Tripify Pvt Ltd
 
+Portfolio: https://dev-vault-alpha.vercel.app/
 GitHub: https://github.com/farhankhan0986
