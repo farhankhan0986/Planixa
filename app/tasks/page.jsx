@@ -250,7 +250,7 @@ function TaskItem({ task, router, onDelete, onUpdate }) {
         <>
           <h3
             onClick={() => router.push(`/tasks/${task._id}`)}
-            className="font-medium cursor-pointer text-emerald-400 lg:text-zinc-200 hover:text-emerald-400 transition"
+            className="font-medium cursor-pointer select-none lg:select-auto text-emerald-400 lg:text-zinc-200 hover:text-emerald-400 transition"
           >
             {task.title}
           </h3>
