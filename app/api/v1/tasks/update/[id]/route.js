@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 export async function PUT(req, { params }) {
   await connectDB();
 
-  const { id } = await params; // ✅ FIX
+  const { id } = await params;
 
   const token = req.cookies.get("token")?.value;
   if (!token) {
@@ -20,20 +20,31 @@ export async function PUT(req, { params }) {
     return NextResponse.json({ message: "Invalid token" }, { status: 401 });
   }
 
-  const { title, description } = await req.json();
+  const body = await req.json();
+  const { title, description, priority, dueDate, status, labels, subtasks, project } = body;
 
-  if (!title || !title.trim()) {
+  if (title !== undefined && (!title || !title.trim())) {
     return NextResponse.json(
       { message: "Title is required" },
       { status: 400 }
     );
   }
 
+  const updateData = {};
+  if (title !== undefined) updateData.title = title;
+  if (description !== undefined) updateData.description = description;
+  if (priority !== undefined) updateData.priority = priority;
+  if (dueDate !== undefined) updateData.dueDate = dueDate ? new Date(dueDate) : null;
+  if (status !== undefined) updateData.status = status;
+  if (labels !== undefined) updateData.labels = labels;
+  if (subtasks !== undefined) updateData.subtasks = subtasks;
+  if (project !== undefined) updateData.project = project || null;
+
   const task = await Task.findOneAndUpdate(
     { _id: id, user: decoded.id },
-    { title, description },
+    updateData,
     { new: true }
-  );
+  ).populate("labels").populate("project");
 
   if (!task) {
     return NextResponse.json({ message: "Task not found" }, { status: 404 });

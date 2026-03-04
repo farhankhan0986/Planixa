@@ -18,7 +18,7 @@ export async function POST(req) {
     return NextResponse.json({ message: "Invalid token" }, { status: 401 });
   }
 
-  const { title, description } = await req.json();
+  const { title, description, priority, dueDate, status, labels, subtasks, project } = await req.json();
 
   if (!title || !title.trim()) {
     return NextResponse.json(
@@ -27,11 +27,20 @@ export async function POST(req) {
     );
   }
 
-  const task = await Task.create({
+  const taskData = {
     title,
     description: description || "",
-    user: decoded.id, // or decoded.userId (must match login token)
-  });
+    user: decoded.id,
+  };
+
+  if (priority) taskData.priority = priority;
+  if (dueDate) taskData.dueDate = new Date(dueDate);
+  if (status) taskData.status = status;
+  if (labels && Array.isArray(labels)) taskData.labels = labels;
+  if (subtasks && Array.isArray(subtasks)) taskData.subtasks = subtasks;
+  if (project) taskData.project = project;
+
+  const task = await Task.create(taskData);
 
   return NextResponse.json(
     {

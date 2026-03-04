@@ -23,7 +23,7 @@ export async function GET(req, { params }) {
   const task = await Task.findOne({
     _id: id,
     user: decoded.id,
-  });
+  }).populate("labels").populate("project");
 
   if (!task) {
     return NextResponse.json(
