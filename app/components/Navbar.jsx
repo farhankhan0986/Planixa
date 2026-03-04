@@ -91,10 +91,50 @@ export default function Navbar() {
                 href="/tasks"
                 className="text-action"
                 style={{
-                  color: pathname === "/tasks" ? 'var(--amber)' : 'var(--text-muted)',
+                  color: pathname === "/tasks" || pathname.startsWith("/tasks/") ? 'var(--amber)' : 'var(--text-muted)',
                 }}
               >
                 Tasks
+              </Link>
+
+              <Link
+                href="/kanban"
+                className="text-action hidden sm:inline"
+                style={{
+                  color: pathname === "/kanban" ? 'var(--amber)' : 'var(--text-muted)',
+                }}
+              >
+                Board
+              </Link>
+
+              <Link
+                href="/calendar"
+                className="text-action hidden sm:inline"
+                style={{
+                  color: pathname === "/calendar" ? 'var(--amber)' : 'var(--text-muted)',
+                }}
+              >
+                Calendar
+              </Link>
+
+              <Link
+                href="/projects"
+                className="text-action hidden sm:inline"
+                style={{
+                  color: pathname === "/projects" ? 'var(--amber)' : 'var(--text-muted)',
+                }}
+              >
+                Projects
+              </Link>
+
+              <Link
+                href="/labels"
+                className="text-action hidden md:inline"
+                style={{
+                  color: pathname === "/labels" ? 'var(--amber)' : 'var(--text-muted)',
+                }}
+              >
+                Labels
               </Link>
 
               {/* Separator rule */}
