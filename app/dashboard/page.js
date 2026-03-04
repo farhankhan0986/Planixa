@@ -109,36 +109,20 @@ export default function Dashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen px-6 py-10">
-        <div className="max-w-5xl mx-auto space-y-8 animate-pulse">
+      <div className="px-6 lg:px-10 py-10">
+        <div className="max-w-3xl space-y-6">
           {/* Header skeleton */}
+          <div className="space-y-2">
+            <div className="skeleton h-8 w-48" />
+            <div className="skeleton h-4 w-64" />
+          </div>
+          <div className="rule" />
+          {/* Form skeleton */}
           <div className="space-y-3">
-            <div className="h-8 w-48 rounded-lg bg-white/10" />
-            <div className="h-4 w-64 rounded bg-white/5" />
-          </div>
-
-          {/* Create task skeleton */}
-          <div className="glass p-6 space-y-4">
-            <div className="h-5 w-32 rounded bg-white/10" />
-            <div className="h-11 w-full rounded-lg bg-white/5" />
-            <div className="h-20 w-full rounded-lg bg-white/5" />
-            <div className="h-11 w-full rounded-lg bg-white/10" />
-          </div>
-
-          {/* Task list skeleton */}
-          <div className="glass p-6 space-y-4">
-            <div className="h-5 w-32 rounded bg-white/10" />
-
-            {[1, 2, 3].map((i) => (
-              <div
-                key={i}
-                className="rounded-xl border border-white/10 p-4 space-y-3"
-              >
-                <div className="h-4 w-1/3 rounded bg-white/10" />
-                <div className="h-3 w-2/3 rounded bg-white/5" />
-                <div className="h-3 w-1/2 rounded bg-white/5" />
-              </div>
-            ))}
+            <div className="skeleton h-4 w-24" />
+            <div className="skeleton h-11 w-full" />
+            <div className="skeleton h-20 w-full" />
+            <div className="skeleton h-11 w-full" />
           </div>
         </div>
       </div>
@@ -147,65 +131,65 @@ export default function Dashboard() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="min-h-screen px-6 py-10"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="px-6 lg:px-10 py-10"
     >
-      <div className="max-w-5xl mx-auto space-y-8">
-        {/* Header */}
-        <div>
-          <div className="flex items-center gap-2 justify-between">
-            <h1 className="text-3xl font-semibold text-gradient">Dashboard</h1>
-            <button
-              onClick={() => router.push("/profile")}
-              className="mt-4 px-4 py-2 rounded-lg font-medium bg-linear-to-r from-emerald-500 to-amber-500 text-black hover:brightness-110"
-            >
-              <span className="text-zinc-900">Profile</span>
-            </button>
+      <div className="max-w-3xl">
+        {/* Header — left-aligned, utilitarian */}
+        <div className="flex items-start justify-between">
+          <div>
+            <h1 className="display" style={{ fontSize: '2rem' }}>Dashboard</h1>
+            <p className="mt-1" style={{ color: 'var(--text-muted)', fontSize: '0.9375rem' }}>
+              Welcome back, {data?.user?.name || "User"}
+            </p>
           </div>
-          <p className="text-zinc-400 mt-1">
-            Welcome back, {data?.user?.name || "User"}
-          </p>
+          <button
+            onClick={() => router.push("/profile")}
+            className="btn-secondary"
+            style={{ height: '2.25rem', fontSize: '0.6875rem' }}
+          >
+            Profile
+          </button>
         </div>
 
-        {/* Create Task */}
-        <div className="glass p-6">
-          <h2 className="text-lg font-medium mb-4 text-zinc-200">
-            Create Task
-          </h2>
+        <div className="rule mt-6 mb-8" />
+
+        {/* Create Task — ruled form, no card wrapper */}
+        <div className="mb-10">
+          <span className="mono block mb-4" style={{ color: 'var(--amber)', textTransform: 'uppercase' }}>
+            ◆ New Task
+          </span>
 
           <form onSubmit={handleCreateTask} className="space-y-3">
             <input
               value={newTask}
               onChange={(e) => setNewTask(e.target.value)}
               placeholder="Task title"
-              className="w-full h-11 px-4 rounded-lg bg-black/40 border border-white/10 text-zinc-200
-              focus:outline-none focus:border-emerald-400/60"
+              className="input-field"
             />
             <textarea
               value={newDescription}
               onChange={(e) => setNewDescription(e.target.value)}
-              placeholder="Task description"
+              placeholder="Task description (optional)"
               rows={2}
-              className="w-full px-4 py-2 rounded-lg bg-black/40 border border-white/10 text-zinc-200
-              focus:outline-none focus:border-emerald-400/60"
+              className="input-field"
+              style={{ height: 'auto', padding: '0.625rem 0.875rem' }}
             />
 
             <motion.button
-              whileTap={{ scale: 0.97 }}
+              whileTap={{ scale: 0.98 }}
               disabled={creating}
-              className={`w-full h-11 rounded-lg font-medium transition
-                ${
-                  creating
-                    ? "bg-zinc-700 cursor-not-allowed"
-                    : "bg-linear-to-r from-emerald-500 to-amber-500 text-black hover:brightness-110"
-                }`}
+              type="submit"
+              className="btn-primary w-full"
             >
               {creating ? "Adding…" : "Add Task"}
             </motion.button>
 
             {createError && (
-              <p className="text-sm text-red-400">{createError}</p>
+              <p className="mono" style={{ color: 'var(--danger)', fontSize: '0.75rem' }}>
+                {createError}
+              </p>
             )}
           </form>
         </div>
