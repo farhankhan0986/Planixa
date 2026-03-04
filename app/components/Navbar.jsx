@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
-import {toast} from "sonner";
+import { toast } from "sonner";
 import { motion } from "framer-motion";
 
 export default function Navbar() {
@@ -43,76 +43,82 @@ export default function Navbar() {
     }
   };
 
+  /* Hide navbar on auth pages — they have their own header */
   if (pathname === "/login" || pathname === "/signup") return null;
 
   return (
     <motion.nav
-      initial={{ y: -20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.45, ease: "easeOut" }}
-      className="sticky top-0 z-50 backdrop-blur-xl bg-black/40 border-b border-white/10"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+      className="sticky top-0 z-50"
+      style={{
+        background: 'var(--ink)',
+        borderBottom: '1px solid var(--rule)',
+        height: '3.5rem',
+      }}
     >
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="flex h-16 items-center justify-between">
-          {/* Logo */}
-          <Link
-            href="/"
-            className="text-lg font-semibold tracking-wide text-gradient"
+      <div className="h-full px-6 lg:px-10 flex items-center justify-between">
+        {/* Logo — monospace, amber dot as a brand mark */}
+        <Link href="/" className="flex items-center gap-2">
+          <span
+            className="inline-block w-2 h-2 rounded-full"
+            style={{ background: 'var(--amber)' }}
+          />
+          <span
+            className="text-sm font-semibold tracking-wide"
+            style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-mono)', letterSpacing: '0.08em', textTransform: 'uppercase' }}
           >
-            <span className="font-bold">Plan</span>ixa
-          </Link>
+            Planixa
+          </span>
+        </Link>
 
-          {/* Right side */}
-          <div className="flex items-center gap-6 text-sm">
-            {user ? (
-              <>
-                <motion.div whileHover={{ y: -1 }}>
-                  <Link
-                    href="/dashboard"
-                    className={`transition ${
-                      pathname === "/dashboard"
-                        ? "text-emerald-400"
-                        : "text-zinc-300 hover:text-zinc-100"
-                    }`}
-                  >
-                    Dashboard
-                  </Link>
-                </motion.div>
+        {/* Right navigation — monospace link strip */}
+        <div className="flex items-center gap-5">
+          {user ? (
+            <>
+              <Link
+                href="/dashboard"
+                className="text-action"
+                style={{
+                  color: pathname === "/dashboard" ? 'var(--amber)' : 'var(--text-muted)',
+                }}
+              >
+                Dashboard
+              </Link>
 
-                <motion.button
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => router.push("/tasks")}
-                  className={`transition ${
-                      pathname === "/tasks"
-                        ? "text-emerald-400"
-                        : "text-zinc-300 hover:text-zinc-100"
-                    }`}
-                >
-                  Tasks
-                </motion.button>
-                <motion.button
-                  whileTap={{ scale: 0.95 }}
-                  onClick={handleLogout}
-                  className="px-4 py-2 rounded-lg text-black font-medium
-                  bg-linear-to-r from-emerald-500 to-amber-500
-                  hover:brightness-110 transition"
-                >
-                  Logout
-                </motion.button>
-              </>
-            ) : (
-              <motion.div whileHover={{ y: -1 }}>
-                <Link
-                  href="/login"
-                  className="px-4 py-2 rounded-lg text-black font-medium
-                  bg-linear-to-r from-emerald-500 to-amber-500
-                  hover:brightness-110 transition"
-                >
-                  Login
-                </Link>
-              </motion.div>
-            )}
-          </div>
+              <Link
+                href="/tasks"
+                className="text-action"
+                style={{
+                  color: pathname === "/tasks" ? 'var(--amber)' : 'var(--text-muted)',
+                }}
+              >
+                Tasks
+              </Link>
+
+              {/* Separator rule */}
+              <span
+                className="hidden sm:block w-px h-4"
+                style={{ background: 'var(--rule-strong)' }}
+              />
+
+              <motion.button
+                whileTap={{ scale: 0.97 }}
+                onClick={handleLogout}
+                className="text-action"
+                style={{ color: 'var(--text-faint)' }}
+                onMouseEnter={(e) => e.target.style.color = 'var(--danger)'}
+                onMouseLeave={(e) => e.target.style.color = 'var(--text-faint)'}
+              >
+                Logout
+              </motion.button>
+            </>
+          ) : (
+            <Link href="/login" className="btn-primary" style={{ height: '2rem', fontSize: '0.6875rem', padding: '0 1rem' }}>
+              Sign In
+            </Link>
+          )}
         </div>
       </div>
     </motion.nav>

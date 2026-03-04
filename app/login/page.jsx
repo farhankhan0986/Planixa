@@ -46,110 +46,157 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-[#0f1115] to-black px-4">
-      <motion.form
-        onSubmit={handleSubmit}
-        initial={{ opacity: 0, y: 24 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="glass w-full max-w-md p-8 flex flex-col gap-5"
-      >
-        {/* Header */}
-        <motion.h2
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.15 }}
-          className="text-2xl font-semibold text-center text-gradient"
+    <div
+      className="min-h-screen flex"
+      style={{ background: 'var(--ink)' }}
+    >
+      {/* Left panel: form — left-aligned, not centered */}
+      <div className="w-full lg:w-1/2 flex items-center px-6 lg:px-16 py-12">
+        <motion.form
+          onSubmit={handleSubmit}
+          initial={{ opacity: 0, x: -16 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+          className="w-full max-w-sm"
         >
-          Welcome Back
-        </motion.h2>
-
-        <p className="text-sm text-center text-zinc-400">
-          Sign in to continue to your dashboard
-        </p>
-
-        {/* Error */}
-        {error && (
-          <motion.p
-            initial={{ opacity: 0, y: -6 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-sm text-red-400 bg-red-500/10 border border-red-500/20 px-3 py-2 rounded-lg"
-          >
-            {error}
-          </motion.p>
-        )}
-
-        {/* Email */}
-        <div className="flex flex-col gap-1">
-          <label className="text-sm text-zinc-300">Email</label>
-          <input
-            type="email"
-            name="email"
-            placeholder="you@example.com"
-            value={formData.email}
-            onChange={handleChange}
-            className="h-12 px-4 rounded-lg bg-[#0f1115] border border-white/10 text-zinc-200
-            focus:outline-none focus:border-emerald-400/60 transition"
-          />
-        </div>
-
-        {/* Password */}
-        <div className="flex flex-col gap-1">
-          <label className="text-sm text-zinc-300">Password</label>
-          <div className="relative">
-            <input
-              type={showPassword ? "text" : "password"}
-              name="password"
-              placeholder="••••••••"
-              value={formData.password}
-              onChange={handleChange}
-              className="h-12 w-full px-4 pr-10 rounded-lg bg-[#0f1115] border border-white/10 text-zinc-200
-              focus:outline-none focus:border-emerald-400/60 transition"
-            />
-            <button
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-200"
-            >
-              👁
-            </button>
+          {/* Brand mark */}
+          <div className="flex items-center gap-2 mb-12">
+            <span className="inline-block w-2 h-2 rounded-full" style={{ background: 'var(--amber)' }} />
+            <span className="mono" style={{ color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+              Planixa
+            </span>
           </div>
-        </div>
 
-        {/* Remember / Forgot */}
-        <div className="flex items-center justify-between text-sm text-zinc-400">
-          <label className="flex items-center gap-2 cursor-pointer">
-            <input type="checkbox" className="accent-emerald-500" />
-            Remember me
-          </label>
-          
-        </div>
+          <h2 className="display" style={{ fontSize: '2rem' }}>
+            Welcome back
+          </h2>
+          <p className="mt-2 mb-8" style={{ color: 'var(--text-muted)', fontSize: '0.9375rem' }}>
+            Sign in to continue to your dashboard
+          </p>
 
-        {/* Submit */}
-        <motion.button
-          whileTap={{ scale: 0.97 }}
-          disabled={loading}
-          className={`h-12 rounded-lg font-medium transition-all
-          ${
-            loading
-              ? "bg-zinc-700 cursor-not-allowed"
-              : "bg-linear-to-r from-emerald-500 to-amber-500 hover:brightness-110 text-black"
-          }`}
-        >
-          {loading ? "Signing in..." : "Sign In"}
-        </motion.button>
+          {/* Error */}
+          {error && (
+            <motion.div
+              initial={{ opacity: 0, y: -6 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mb-4 p-3"
+              style={{
+                background: 'rgba(200, 92, 74, 0.1)',
+                borderLeft: '2px solid var(--danger)',
+                color: 'var(--danger)',
+                fontFamily: 'var(--font-mono)',
+                fontSize: '0.8125rem',
+              }}
+            >
+              {error}
+            </motion.div>
+          )}
 
-        {/* Footer */}
-        <p className="text-center text-sm text-zinc-400">
-          Don&apos;t have an account?
-          <a
-            href="/signup"
-            className="ml-1 text-emerald-400 hover:text-emerald-300 transition"
+          {/* Email */}
+          <div className="mb-4">
+            <label className="mono block mb-2" style={{ color: 'var(--text-muted)', textTransform: 'uppercase' }}>
+              Email
+            </label>
+            <input
+              type="email"
+              name="email"
+              placeholder="you@example.com"
+              value={formData.email}
+              onChange={handleChange}
+              className="input-field"
+            />
+          </div>
+
+          {/* Password */}
+          <div className="mb-4">
+            <label className="mono block mb-2" style={{ color: 'var(--text-muted)', textTransform: 'uppercase' }}>
+              Password
+            </label>
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                placeholder="••••••••"
+                value={formData.password}
+                onChange={handleChange}
+                className="input-field"
+                style={{ paddingRight: '2.5rem' }}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 mono"
+                style={{ color: 'var(--text-faint)', fontSize: '0.6875rem', cursor: 'pointer' }}
+              >
+                {showPassword ? "HIDE" : "SHOW"}
+              </button>
+            </div>
+          </div>
+
+          {/* Remember me */}
+          <div className="flex items-center gap-2 mb-6">
+            <input
+              type="checkbox"
+              style={{ accentColor: 'var(--amber)' }}
+            />
+            <span className="mono" style={{ color: 'var(--text-faint)', fontSize: '0.75rem' }}>
+              Remember me
+            </span>
+          </div>
+
+          {/* Submit */}
+          <motion.button
+            whileTap={{ scale: 0.98 }}
+            disabled={loading}
+            type="submit"
+            className="btn-primary w-full"
           >
-            Sign Up
-          </a>
-        </p>
-      </motion.form>
+            {loading ? "Signing in..." : "Sign In"}
+          </motion.button>
+
+          {/* Footer */}
+          <p className="mt-6" style={{ color: 'var(--text-faint)', fontSize: '0.875rem' }}>
+            Don&apos;t have an account?{" "}
+            <a
+              href="/signup"
+              style={{ color: 'var(--amber)', textDecoration: 'none' }}
+            >
+              Sign Up
+            </a>
+          </p>
+        </motion.form>
+      </div>
+
+      {/* Right panel: typographic decoration — visible on large screens */}
+      <div
+        className="hidden lg:flex w-1/2 items-center justify-center relative overflow-hidden"
+        style={{ background: 'var(--surface)', borderLeft: '1px solid var(--rule)' }}
+      >
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.3 }}
+          className="select-none"
+          style={{ textAlign: 'right', paddingRight: '3rem' }}
+        >
+          {/* Oversized decorative type */}
+          <div
+            className="display"
+            style={{
+              fontSize: '8rem',
+              color: 'var(--rule-strong)',
+              lineHeight: '0.9',
+            }}
+          >
+            Plan
+            <br />
+            <span style={{ color: 'var(--amber)', opacity: 0.3 }}>ixa</span>
+          </div>
+          <p className="mono mt-4" style={{ color: 'var(--text-faint)' }}>
+            precision task management
+          </p>
+        </motion.div>
+      </div>
     </div>
   );
 }
